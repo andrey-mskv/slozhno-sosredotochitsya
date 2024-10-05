@@ -1,23 +1,16 @@
-/* Основные стили проекта. Это стили для темы, которую вы верстаете первой. */
-
 .page {
-  /* background-color: var(--bg-color, #000028); */
   color: var(--text-color, #f1b2ce);
   font-family: var(--main-font, serif);
-  /* padding: 10px; */
-  background: var(--bg-img) no-repeat center / cover;
+  background: var(--bg-img) no-repeat center bottom / cover;
   background-color: var(--bg-color);
   background-attachment: fixed;
-  /* font-size: 18px; */
   line-height: 1.3em;
-  /* сохраните в разметке и стилях класс page. На его основе работает скрипт. */
 }
 
 .title-decor {
   background-color: var(--accent-color);
   color: var(--subtitle-color);
   font-weight: bold;
-  /* margin: 0 0 10px; */
 }
 
 .list__title {
@@ -35,9 +28,12 @@
   margin-bottom: 40px;
 }
 
+/* "высота привязана к высоте окна браузера, ограничена минимальная высота"
+Не понял это коментарий */
+
 .header,
 .footer {
-  height: 100vh;
+  block-size: 100vh;
   max-height: 668px;
 }
 
@@ -82,8 +78,8 @@
   border-left: 1px solid var(--accent-title-color);
   border-bottom: 1px solid var(--accent-title-color);
   display: block;
-  width: 25px;
-  height: 25px;
+  inline-size: 25px;
+  block-size: 25px;
   position: absolute;
   bottom: var(--body-field);
   left: var(--body-field);
@@ -94,8 +90,8 @@
   border-right: 1px solid var(--accent-title-color);
   border-top: 1px solid var(--accent-title-color);
   display: block;
-  width: 25px;
-  height: 25px;
+  inline-size: 25px;
+  block-size: 25px;
   position: absolute;
   top: var(--body-field);
   right: var(--body-field);
@@ -106,8 +102,8 @@
   position: absolute;
   top: var(--body-field);
   right: var(--body-field);
-  width: 25px;
-  height: 25px;
+  inline-size: 25px;
+  block-size: 25px;
 }
 
 .header__decor-lamp::before {
@@ -125,21 +121,19 @@
   position: absolute;
   display: block;
   background-color: var(--accent-color);
-  width: 9px;
-  height: 9px;
+  inline-size: 9px;
+  block-size: 9px;
   margin: calc(50% - 4.5px);
   border-radius: 100%;
   box-shadow: 0 0 4px 2px var(--accent-color);
 }
 
 .header__description-wrap {
-  /* margin: 55px 0 56px; */
-  /* margin: clamp(3.4375rem, -2.9437rem + 27.2265vw, 10.125rem) 0 clamp(3.5rem, -2.8812rem + 27.2265vw, 10.1875rem); */
-  width: min(100%, 364px);
+  inline-size: min(100%, 364px);
 }
 
 .images img {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .header__theme-menu-list {
@@ -156,7 +150,7 @@
   line-height: 1;
   padding: 2px 0 4px;
   font-size: 18px;
-  width: 68px;
+  inline-size: 68px;
   cursor: pointer;
 }
 
@@ -167,21 +161,21 @@
 }
 
 .header__theme-menu-button:focus-visible {
-  border-bottom: 1px solid var(--accent-color);
+  border-bottom: 1px solid var(--accent-title-color);
 }
 
 .content__link:focus-visible::before {
   content: '';
   position: absolute;
   border: 1px solid var(--text-color);
-  width: calc(100% + 0.333em);
-  height: calc(100% - 0.055em);
+  inline-size: calc(100% + 0.333em);
+  block-size: calc(100% - 0.055em);
   inset-block-start: 0.111em;
   inset-inline-start: -0.166em;
 }
 
 .header__theme-menu-item {
-  height: 26px;
+  block-size: 26px;
 }
 
 .content__link {
@@ -244,6 +238,7 @@
 
   .content__section {
     margin-bottom: 80px;
+    grid-template-columns: minmax(236px, 1fr) 1fr 1fr;
   }
 
   .header__title,
@@ -257,7 +252,7 @@
   }
 
   .header__description-wrap {
-    width: clamp(22.75rem, -1.0625rem + 49.6094vw, 30.6875rem);
+    inline-size: clamp(22.75rem, -1.0625rem + 49.6094vw, 30.6875rem);
   }
 
   .images {
@@ -277,20 +272,14 @@
     min-height: 100%;
   }
 
-  .grid-1,
-  .grid-3 {
-    grid-template-columns: 1fr 2fr;
-  }
-
-  .grid-2 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .grid-1 .content__description {
+  .content__section:first-child .content__description,
+  .content__section:nth-child(3) .content__lists {
     grid-column-start: 2;
+    grid-column-end: span 2;
   }
 
-  .grid-2 .content__description {
+  .content__section:nth-child(2) .content__description {
+    /* grid-row-start: 2; */
     grid-column-end: span 3;
   }
 }
@@ -315,8 +304,13 @@
     flex-direction: row;
   }
 
-  .grid-2 .content__description {
+  .content__section:nth-child(2) {
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  }
+
+  .content__section:nth-child(2) .content__description {
+    /* grid-template-columns: repeat(auto-fill, 1fr); */
     grid-row-start: 2;
-    grid-column-end: span 1;
+    grid-column: span 1;
   }
 }

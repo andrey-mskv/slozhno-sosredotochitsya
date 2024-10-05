@@ -1,10 +1,4 @@
-/*
-  Переменные для вашего проекта
-  и их переопределение под различные устройства
-*/
-
-:root {
-  --main-font: 'IBM Plex mono';
+.page.theme_dark {
   --accent-color: #ff0070;
   --accent-color-40: #ff007040;
   --accent-title-color: #ff0070;
@@ -13,14 +7,6 @@
   --title-color: #db00ff;
   --subtitle-color: #000028;
   --text-color: #f1b2ce;
-  --body-field: 10px;
   --bg-img: url(../images/cover-image-dark.png);
   --decorated-visible: block;
-}
-
-@media (width >= 768px) {
-
-  :root {
-    --body-field: 20px;
-  }
 }

@@ -10,6 +10,7 @@ function serve() {
   browserSync.init({
     server: {
       baseDir: './dist'
+      // baseDir: '.'
     }
   });
 }
@@ -82,6 +83,7 @@ exports.images = images;
 exports.fonts = fonts;
 exports.scripts = scripts;
 exports.clean = clean;
+exports.serve = serve;
 
 exports.build = build;
 exports.watchapp = watchapp;
